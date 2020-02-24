@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello wolrd</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">{{content}}</div>
+	<script>
+		//script引入vue.js
+		var app = new Vue({//创建一个Vue实例，
+			el:'#app',//#是指的是id。让vue去接管id为app这个div中的数据。其实就是范围
+			data : {//data定义一些数据，
+				content: "hello world"
+			}
+		})
+		setTimeout(function(){
+			app.$data.content = 'bye world'
+		},2000)
+	</script>
+</body>
+</html>
