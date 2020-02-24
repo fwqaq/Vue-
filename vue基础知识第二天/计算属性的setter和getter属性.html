@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性的setter和gettter</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		{{fullName}}
+	</div>
+	<script>
+	
+		var vm = new Vue({//创建一个Vue实例，
+			el:'#app',//#是指的是id。让vue去接管id为app这个div中的数据。其实就是范围
+			data : {
+				firstName:"Dell",
+				lastName:"Lee"
+			},
+			computed:{
+			// fullName:function(){
+			// 	return this.firstName+" "+this.lastName;
+			// }
+				fullName:{
+					get:function(){
+						return this.firstName+" "+this.lastName;
+					},
+					set:function(value){
+						var arr = value.split(" ");
+						this.firstName = arr[0];
+						this.lastName = arr[1];
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

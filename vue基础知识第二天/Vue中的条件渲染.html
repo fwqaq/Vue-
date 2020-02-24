@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue中的条件渲染</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+<!-- 		<div v-if="show"> -->
+			<!-- v-if决定标签是否在页面中显示，没有渲染到页面，不存在dom之上 -->
+<!-- 			{{message}}
+		</div>
+		<div v-else="show">Bye World</div>
+		<div v-show = "show"> -->
+			<!-- 同样是不显示，但是已经被渲染到页面只是不显示 ，已经存在于dom上-->
+	<!-- 		{{message}}
+		</div> -->
+		<div v-if = "show">
+			用户名：<input key="username"/>
+		</div>
+		<div v-else>
+			邮箱名：<input ke="password"/>
+		</div>
+	</div>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				show:false,
+				// message:"Hello world"
+			}
+		})
+	</script>
+</body>
+</html>

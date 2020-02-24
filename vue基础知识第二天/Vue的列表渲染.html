@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue中的列表渲染</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+<!-- 		<template> v-for="(item,index) of list" 
+			 :key="item.id">
+			{{item.text}}------{{index}}
+		<span v-for="(item,index) of list" 
+			 :key="item.id">{{item.text}}</span>
+
+		</template> -->
+		<div v-for="(item,key,index) of userInfo">
+			{{item}}----{{key}}----{{index}}
+			<!-- key就是键名，index就是对象信息的位置 数据改变页面就会改变-->
+
+		</div>
+
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				// list:[{
+				// 	id:"02020230301",
+				// 	text:"hello"
+				// },{
+				// 	id:"56232312331",
+				// 	text:"world"
+				// }
+				// ]
+				userInfo:{
+					name:"Dell",
+					age:28,
+					gender:"male",
+					salary:"secret"
+				}
+			}
+		})
+	</script>
+</body>
+</html>
