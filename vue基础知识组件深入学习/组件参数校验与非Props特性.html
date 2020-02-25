@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组建参数校验与非Props特性</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		<child :content="123"></child>
+	</div>
+	<script>
+		Vue.component('child',{
+			props:{
+				//content:Number//子组件接受的content必须是一个String类型
+				//[Number,String]子组件接受的是Number或者String
+				//还可以接受一个对象
+				content:{
+					type:String,
+					required:false,//可以穿值或者不传值，如果是true就必须传值
+					default:'default value',//如果不传值的时候就使用默认值
+					validator:function(value){
+						return (value.length>5)
+					}
+					//校验器，要求长度大于5
+				}
+			},
+			template:'<div>{{content}}</div>'
+		})
+		var vm = new Vue({
+			el:'#app'
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue中的插槽slot</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		<child >
+			<div class='header' slot ='header'>header</div>
+		</child>	
+	</div>
+	<script>
+		Vue.component('child',{
+			template:'<div><p>hello</p><slot name='header'>默认内容</slot></div>'
+			//slot还可以定义默认值，当不传递的时候使用默认内容，如果传递了就使用div中的内容
+		})
+		var vm = new Vue({
+			el:'#app',
+		})
+	</script>
+</body>
+</html>

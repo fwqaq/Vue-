@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件传值</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+<!-- 父组件向子组件传递数据 -->
+	<!-- <div id="root">
+	通过属性count传递 count不加：是表示一个字符串  加count就是一个数字 
+		<counter :count="1"></counter>
+		<counter :count="2"></counter>
+	</div>
+	<script>
+		var counter = {
+			props:['count'],
+			data:function(){
+				return {
+					number:this.count
+				}
+			},
+			template:'<div @click="handleClick">{{number}}</div>',
+			methods:{
+				handleClick:function(){
+					this.number++
+				}
+			}
+		}
+		var vm = new Vue({
+			el:'#root',
+			components:{
+				counter:counter
+			}
+		})
+	</script> -->
+<!-- 子组件向父组件传递数据 -->
+	<div id="root">
+	<!-- 通过属性count传递 count不加：是表示一个字符串  加count就是一个数字  -->
+		<counter :count="1" @change="handleChange"></counter>
+		<counter :count="2" @change="handleChange"></counter>
+		<div>{{total}}</div>	
+	</div>
+	<script>
+		var counter = {
+			props:['count'],
+			data:function(){
+				return {
+					number:this.count
+				}
+			},
+			template:'<div @click="handleClick">{{number}}</div>',
+			methods:{
+				handleClick:function(){
+					this.number++;
+					this.$emit('change',1)
+				}
+			}
+		}
+		var vm = new Vue({
+			el:'#root',
+			data:{
+				total:3
+			},
+			components:{
+				counter:counter
+			},
+			methods:{
+				handleChange:function(value){
+					this.total = this.total+value;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

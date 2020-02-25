@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>非父子之间传递数据（BUS模式/发布订阅模式/观察者模式）</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		<child content="Dell"></child>
+		<child content="Lee"></child>
+	</div>
+	<script>
+
+	Vue.prototype.bus=new Vue()
+		//在Vue类上挂载一个bus属性
+	Vue.component(
+		'child',
+		{
+			data:function(){
+				return {
+					selfCountent:this.content
+				}
+			},
+			props:{
+				content:String
+			},
+			template:'<div @click="handleClick">{{selfCountent}}</div>',
+			methods:{
+				handleClick:function(){
+					this.bus.$emit('change',this.selfCountent)
+				}
+			},
+			mounted:function(){
+				var this_ = this
+				this.bus.$on('change',function(msg){
+					this_.selfCountent = msg
+				})
+			}
+	})
+		var app = new Vue({
+			el:'#app',
+		})
+
+	</script>
+</body>
+</html>
