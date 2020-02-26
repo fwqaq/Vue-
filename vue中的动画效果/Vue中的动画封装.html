@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue中的d动画封装</title>
+	<script src='./vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		<!-- transition-group相当于在列表中的每一项都增加一个transition，每一个都有自己的动画 -->
+		<fade :show="show">
+			<div>hello world</div>
+		</fade>
+		<button @click="handleBtnClick">Add</button>
+	</div>
+	<script>
+	Vue.component('fade',{
+		props:['show'],
+		template:'<transition @before-enter="handleBeforeEnter"  @enter="handleEnter"><slot v-if="show"></slot></transition>',
+		methods:{
+			handleBeforeEnter:function(el){
+				el.style.color='red'
+			},
+			handleEnter:function(el,done){
+				setTimeout(()=>{
+					el.style.color='green'
+					done()
+				},2000)
+			}
+		}
+	})//使用组件对动画进行封装，并且可以将样式封装
+		var count = 0;
+		var app = new Vue({
+			el:'#app',
+			data:{
+				show:false
+			},
+			methods:{
+				handleBtnClick:function(){
+					this.show = !this.show
+				}
+			}
+		})
+	
+	</script>
+</body>
+</html>
